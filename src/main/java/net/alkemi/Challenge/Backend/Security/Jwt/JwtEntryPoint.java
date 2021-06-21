@@ -1,0 +1,31 @@
+package net.alkemi.Challenge.Backend.Security.Jwt;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
+
+// Clase JwtEntryPoint verifica si hay un Token Valido o tira error 401 
+@Component
+public class JwtEntryPoint implements AuthenticationEntryPoint {
+
+	//verificar que metodo nos esta dando error
+	private final static Logger logger = LoggerFactory.getLogger(JwtEntryPoint.class);
+	
+	@Override
+	public void commence(HttpServletRequest req, HttpServletResponse res,
+			AuthenticationException e) throws IOException, ServletException {
+		 logger.error("fail en el metodo commence");
+		 res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "no autorizado"  );
+		
+	}
+	
+
+}
